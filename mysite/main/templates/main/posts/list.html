@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% block title  %} My Blog {% endblock %}
+
+{% block content %}
+    {% for item in posts %}
+    <h2>
+        <a href="{% url 'main:post_detail' item.id %}">
+            {{ item.title }}
+        </a>
+    </h2>
+    <p class="date">
+        Published {{ item.publish }} by {{ item.author }}
+    </p>
+    {{ item.body|truncatewords:30|linebreaks }}
+    {% endfor %}
+{% endblock %}
