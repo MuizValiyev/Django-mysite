@@ -3,15 +3,16 @@
 {% block title  %} My Blog {% endblock %}
 
 {% block content %}
-    {% for item in posts %}
+    {% for post in posts %}
     <h2>
-        <a href="{% url 'main:post_detail' item.id %}">
-            {{ item.title }}
+        <a href="{{ post.get_absolute_url }}">
+            {{ post.title }}
         </a>
     </h2>
     <p class="date">
-        Published {{ item.publish }} by {{ item.author }}
+        Published {{ post.publish }} by {{ post.author }}
     </p>
-    {{ item.body|truncatewords:30|linebreaks }}
+    {{ post.body|truncatewords:30|linebreaks }}
     {% endfor %}
-{% endblock %}
+    {% include 'main/paginator.html' with page=posts %}
+    {% endblock %}
